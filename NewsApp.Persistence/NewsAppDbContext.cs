@@ -27,19 +27,19 @@ namespace NewsApp.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //one to many
+
             modelBuilder.Entity<Article>()
                 .HasMany(c => c.Comments)
                 .WithOne(c => c.Article);
             modelBuilder.Entity<Article>()
-               .HasMany(c => c.Categorys)
-               .WithOne(c => c.Article);
+                .HasOne(b => b.Journalist)
+                .WithMany(b => b.Articles);
+            modelBuilder.Entity<Article>()
+                .HasOne(c => c.Category)
+                .WithMany(c => c.Articles);
             modelBuilder.Entity<User>()
               .HasMany(c => c.Comments)
               .WithOne(c => c.User);
-            modelBuilder.Entity<Article>()
-               .HasOne(b => b.Journalist)
-               .WithMany(b => b.Articles);
 
 
 

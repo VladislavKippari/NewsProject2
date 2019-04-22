@@ -11,9 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{7543439F-BB73-4E48-8849-57E15ECA9581}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Domain", "NewsApp.Domain\NewsApp.Domain.csproj", "{0229705E-2E31-48A9-9C5B-70143F43FA87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Domain", "NewsApp.Domain\NewsApp.Domain.csproj", "{0229705E-2E31-48A9-9C5B-70143F43FA87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Persistence", "NewsApp.Persistence\NewsApp.Persistence.csproj", "{8F7DA6EA-8563-4117-9611-E1C0DD4A57CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Persistence", "NewsApp.Persistence\NewsApp.Persistence.csproj", "{8F7DA6EA-8563-4117-9611-E1C0DD4A57CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.ReposInterfaces", "NewsApp.ReposInterfaces\NewsApp.ReposInterfaces.csproj", "{B05E1EDE-1694-4B10-9F85-49ED9ADB84E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Repository", "NewsApp.Repository\NewsApp.Repository.csproj", "{8DB061F2-96A3-419E-8BD0-74AF768A2C71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,14 @@ Global
 		{8F7DA6EA-8563-4117-9611-E1C0DD4A57CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F7DA6EA-8563-4117-9611-E1C0DD4A57CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F7DA6EA-8563-4117-9611-E1C0DD4A57CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B05E1EDE-1694-4B10-9F85-49ED9ADB84E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B05E1EDE-1694-4B10-9F85-49ED9ADB84E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B05E1EDE-1694-4B10-9F85-49ED9ADB84E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B05E1EDE-1694-4B10-9F85-49ED9ADB84E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DB061F2-96A3-419E-8BD0-74AF768A2C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DB061F2-96A3-419E-8BD0-74AF768A2C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DB061F2-96A3-419E-8BD0-74AF768A2C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DB061F2-96A3-419E-8BD0-74AF768A2C71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +51,8 @@ Global
 		{7543439F-BB73-4E48-8849-57E15ECA9581} = {EF76FA51-1141-4048-9451-DB452E253AAD}
 		{0229705E-2E31-48A9-9C5B-70143F43FA87} = {F7A39C3A-041C-40FA-A1FD-147DF682A798}
 		{8F7DA6EA-8563-4117-9611-E1C0DD4A57CF} = {6184B21D-125F-4BDE-BFCC-AC77EC2DB395}
+		{B05E1EDE-1694-4B10-9F85-49ED9ADB84E1} = {6184B21D-125F-4BDE-BFCC-AC77EC2DB395}
+		{8DB061F2-96A3-419E-8BD0-74AF768A2C71} = {6184B21D-125F-4BDE-BFCC-AC77EC2DB395}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78900590-A84B-4D30-B724-43403B6B3749}

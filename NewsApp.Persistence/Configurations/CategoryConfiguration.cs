@@ -14,6 +14,9 @@ namespace NewsApp.Persistence.Configurations
         {
             builder.HasKey(e => e.CategoryId);
             builder.Property(u => u.CategoryId).ValueGeneratedOnAdd();
+            builder.Property(e => e.Name).IsRequired().HasMaxLength(20);
+
+            builder.ToTable("Category");
         }
     }
 }

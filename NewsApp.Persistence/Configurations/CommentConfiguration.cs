@@ -14,6 +14,9 @@ namespace NewsApp.Persistence.Configurations
         {
             builder.HasKey(e => e.CommentId);
             builder.Property(u => u.CommentId).ValueGeneratedOnAdd();
+            builder.Property(e => e.CommentText).IsRequired().HasMaxLength(255);
+
+            builder.ToTable("Comment");
         }
     }
 }

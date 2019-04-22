@@ -14,6 +14,11 @@ namespace NewsApp.Persistence.Configurations
         {
             builder.HasKey(e => e.UserId);
             builder.Property(u => u.UserId).ValueGeneratedOnAdd();
+            builder.Property(e => e.Login).IsRequired().HasMaxLength(20);
+            builder.Property(e => e.Email).IsRequired().HasMaxLength(30);
+            builder.Property(e => e.Password).IsRequired().HasMaxLength(20);
+
+            builder.ToTable("User");
         }
     }
 }
