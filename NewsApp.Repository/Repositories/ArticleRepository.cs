@@ -13,6 +13,15 @@ namespace NewsApp.Repository.Repositories
     {
         NewsAppDbContext context;
 
+        public ArticleRepository()
+        {
+            context = new NewsAppDbContext();
+        }
+        public ArticleRepository(NewsAppDbContext context)
+        {
+            this.context =context;
+        }
+
         public void Add(Article entity)
         {
             context.Articles.Add(entity);

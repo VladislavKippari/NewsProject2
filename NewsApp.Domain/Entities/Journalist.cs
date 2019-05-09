@@ -18,5 +18,7 @@ namespace NewsApp.Domain.Entities
         public string Surename { get; set; }
         public string Biography { get; set; }
         public ICollection<Article> Articles { get; set; }
+        public Role Role { get; set; }
+
     }
 }

@@ -15,14 +15,15 @@ namespace NewsApp.Persistence
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Journalist> Journalists { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
         public NewsAppDbContext(DbContextOptions<NewsAppDbContext> options)
-            : base(options)
-        { }
+            : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer
-                (@"Server=(localdb)\mssqllocaldb;Database=NewsAppDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=NewsAppDB;Trusted_Connection=True;");
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,14 +42,25 @@ namespace NewsApp.Persistence
               .HasMany(c => c.Comments)
               .WithOne(c => c.User);
 
-
+            modelBuilder.Entity<Role>()
+              .HasMany(r => r.Users)
+              .WithOne(r => r.Role);
+            modelBuilder.Entity<Journalist>()
+                 .HasOne(u => u.Role)
+                 .WithMany(u => u.Journalists);
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Role)
+                .WithMany(u => u.Users);
+            //Configuration : IEntityTypeConfiguration
+            
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
             modelBuilder.ApplyConfiguration(new ArticleConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             modelBuilder.ApplyConfiguration(new JournalistConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-           
+            modelBuilder.SeedData();
 
         }
 

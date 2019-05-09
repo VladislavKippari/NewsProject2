@@ -1,0 +1,17 @@
+﻿@model IEnumerable<NewsApp.Domain.Entities.Article>
+
+
+<h2>Actors</h2>
+<table class="table table-striped">
+    <thead>
+        <tr><th>Name</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@($"{a.Title} {a.ArticleText}")</td>
+            </tr>
+        }
+    </tbody>
+</table>

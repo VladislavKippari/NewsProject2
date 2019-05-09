@@ -1,0 +1,54 @@
+﻿@using NewsApp.Domain.Entities
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h2>Admin panel</h2>
+
+
+<table class="table table-striped">
+    <thead class="bg-primary">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Firstname
+            </th>
+            <th>
+                Lastname
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Role
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var users = ViewBag.Users; }
+        @foreach (User user in users)
+        {
+            <tr>
+                <td>
+                    @user.UserId
+                </td>
+                <td>
+                    @user.FirstName
+                </td>
+                <td>
+                    @user.LastName
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.Role.RoleName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

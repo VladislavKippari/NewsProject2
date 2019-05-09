@@ -12,11 +12,12 @@ namespace NewsApp.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(e => e.UserId);
+            builder.HasKey(u => u.UserId);
             builder.Property(u => u.UserId).ValueGeneratedOnAdd();
-            builder.Property(e => e.Login).IsRequired().HasMaxLength(20);
-            builder.Property(e => e.Email).IsRequired().HasMaxLength(30);
-            builder.Property(e => e.Password).IsRequired().HasMaxLength(20);
+            builder.Property(u => u.FirstName).HasMaxLength(30).IsRequired();
+            builder.Property(u => u.LastName).HasMaxLength(30).IsRequired();
+            builder.Property(u => u.Email).HasMaxLength(30).IsRequired();
+            builder.Property(u => u.Password).IsRequired();
 
             builder.ToTable("User");
         }
