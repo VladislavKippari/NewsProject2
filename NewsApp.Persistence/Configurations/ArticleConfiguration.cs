@@ -13,9 +13,9 @@ namespace NewsApp.Persistence.Configurations
         {
             builder.HasKey(e => e.ArticleId);
             builder.Property(u => u.ArticleId).ValueGeneratedOnAdd();
-            builder.Property(e => e.Title).IsRequired().HasMaxLength(100);
-            builder.Property(e => e.CreatingDate).IsRequired().HasDefaultValueSql("getdate()");
-            builder.Property(e => e.ArticleText).IsRequired();
+            builder.Property(e => e.Title).HasMaxLength(100);
+            builder.Property(e => e.CreatingDate).HasDefaultValueSql("getdate()");
+            builder.Property(e => e.ArticleText);
             builder.Property(e => e.Image).HasMaxLength(100);
 
             builder.ToTable("Article");

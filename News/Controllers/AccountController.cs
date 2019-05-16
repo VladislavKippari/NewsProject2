@@ -21,6 +21,7 @@ namespace News.Controllers
         {
             db = context;
         }
+        string startupPath = Environment.CurrentDirectory;
         [HttpGet]
         public IActionResult Login()
         {

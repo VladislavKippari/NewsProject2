@@ -9,6 +9,7 @@ namespace NewsApp.Domain.Entities
         public User()
         {
             Comments = new HashSet<Comment>();
+            Articles = new HashSet<Article>();
         }
         public int UserId { get; set; }
         public string FirstName { get; set; }
@@ -17,5 +18,6 @@ namespace NewsApp.Domain.Entities
         public string Password { get; set; }
         public Role Role { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<Article> Articles { get; set; }
     }
 }

@@ -1,21 +1,22 @@
-﻿using System;
+﻿using NewsApp.Domain.Entities;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace NewsApp.Domain.Entities
+namespace News.Models
 {
-    public class Article
+    public class ArticleViewModel
     {
-        public Article()
+        public ArticleViewModel()
         {
             Comments = new HashSet<Comment>();
         }
-        public int ArticleId { get; set; }
+        
         public string Title { get; set; }
-        public DateTime CreatingDate { get; set; }
         public string ArticleText { get; set; }
         public string Image { get; set; }
-        public User Journalist { get; set; }
+        public Journalist Journalist { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public Category Category { get; set; }
     }

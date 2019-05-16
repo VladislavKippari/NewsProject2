@@ -11,12 +11,9 @@ namespace NewsApp.Repository.Repositories
 {
     public class ArticleRepository : IArticleRepository
     {
-        NewsAppDbContext context;
+         NewsAppDbContext context;
 
-        public ArticleRepository()
-        {
-            context = new NewsAppDbContext();
-        }
+     
         public ArticleRepository(NewsAppDbContext context)
         {
             this.context =context;

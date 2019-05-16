@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NewsApp.Persistence;
+using NewsApp.ReposInterfaces;
+using NewsApp.Repository.Repositories;
 
 namespace News
 {
@@ -45,8 +47,8 @@ namespace News
                 });
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            //services.AddMvc(options =>
-            //        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+            services.AddTransient<IArticleRepository, ArticleRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

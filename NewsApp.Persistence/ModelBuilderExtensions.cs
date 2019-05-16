@@ -12,7 +12,8 @@ namespace NewsApp.Persistence
         {
             modelBuilder.Entity<Role>().HasData(
                 new { RoleId = 1, RoleName = "Admin" },
-                new { RoleId = 2, RoleName = "User " });
+                new { RoleId = 2, RoleName = "User" },
+            new { RoleId = 3, RoleName = "Journalist" });
             modelBuilder.Entity<User>().HasData(new
             {
                 UserId = 1,
@@ -30,6 +31,16 @@ namespace NewsApp.Persistence
                 Email = "user1@test.com",
                 Password = PasswordGenerate.HashPassword("User1-12345"),
                 RoleId = 2
+            });
+            modelBuilder.Entity<User>().HasData(new
+            {
+                UserId = 3,
+                Login = "journalist1",
+                Name = "Journalist",
+                Lastname = "Journalist",
+                Email = "journalist@test.com",
+                Password = PasswordGenerate.HashPassword("Journ-12345"),
+                RoleId = 3
             });
         }
     }

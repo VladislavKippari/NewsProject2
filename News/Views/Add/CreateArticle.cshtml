@@ -1,0 +1,18 @@
+﻿@model IEnumerable<NewsApp.Domain.Entities.Article>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-action="UploadImage" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="file" name="user_image" id="user_image" />
+    </div>
+    <label>Title</label>
+    <input type="text" name="testTitle" />
+    <label>Text</label>
+    <input type="text" name="Text" />
+
+    <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-default" />
+    </div>
+</form>

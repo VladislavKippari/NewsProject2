@@ -16,9 +16,9 @@ namespace NewsApp.Persistence.Configurations
             builder.Property(u => u.JournalistId).ValueGeneratedOnAdd();
             builder.Property(e => e.Login).IsRequired().HasMaxLength(20);
             builder.Property(e => e.Email).IsRequired().HasMaxLength(30);
-            builder.Property(e => e.Password).IsRequired().HasMaxLength(20);
+            builder.Property(e => e.Password).IsRequired();
             builder.Property(e => e.Name).HasMaxLength(50);
-            builder.Property(e => e.Surename).HasMaxLength(50);
+            builder.Property(e => e.Lastname).HasMaxLength(50);
 
             builder.ToTable("Journalist");
         }
