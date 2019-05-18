@@ -12,12 +12,12 @@ using NewsApp.ReposInterfaces;
 
 namespace News.Controllers
 {
-    public class TestController : Controller
+    public class CreateArticleController : Controller
     {
-        
+
         IArticleRepository articleRepo;
         NewsAppDbContext test = new NewsAppDbContext();
-        public TestController(IArticleRepository ar)
+        public CreateArticleController(IArticleRepository ar)
         {
 
             articleRepo = ar;
@@ -26,24 +26,20 @@ namespace News.Controllers
 
         string connectionString = @"Server=(localdb)\mssqllocaldb;Database=NewsAppDB;Trusted_Connection=True;";
 
-        public IActionResult Testing()
+        public IActionResult CreateArticle()
         {
-           
+
             return View();
         }
-        public IActionResult Listok()
-        {
-            var model = FetchImageFromDB();
-            return View(model);
-        }
-        
+     
+
 
         [HttpPost]
-        public async Task<IActionResult> UploadImage(IFormCollection form,string testTitle,string Text)
+        public async Task<IActionResult> UploadImage(IFormCollection form, string testTitle, string Text)
         {
             string storePath = "wwwroot/images/";
             if (form.Files == null || form.Files[0].Length == 0)
-                return RedirectToAction("Testing");
+                return RedirectToAction("CreateArticle");
 
 
             var path = Path.Combine(
@@ -54,17 +50,17 @@ namespace News.Controllers
             {
                 await form.Files[0].CopyToAsync(stream);
             }
-          
+
             StoreInDB(storePath + form.Files[0].FileName, testTitle, Text);
 
-            return RedirectToAction("Listok");
+            return RedirectToAction("CreateArticle");
 
         }
 
 
-        public void StoreInDB(string path,string testTitle,string Text)
+        public void StoreInDB(string path, string testTitle, string Text)
         {
-            
+
             using (var con = new SqlConnection(connectionString))
             {
                 con.Open();
@@ -87,8 +83,8 @@ namespace News.Controllers
             where articl.ArticleId == test.Articles.Count()
             select articl;
             var art = test.Articles.Where(w => w.ArticleId == test.Articles.Count()).FirstOrDefault();
-           
-           
+
+
             art.Title = testTitle;
             art.ArticleText = Text;
             test.SaveChanges();
@@ -119,18 +115,5 @@ namespace News.Controllers
 
             return imagePath;
         }
-
-
-
-
-
-
-
-
-     
-
-        
-
-
     }
 }

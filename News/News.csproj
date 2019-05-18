@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-News-D57294D4-C473-4518-9A51-91E2651FE698</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.7" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NewsApp.Domain\NewsApp.Domain.csproj" />
     <ProjectReference Include="..\NewsApp.Persistence\NewsApp.Persistence.csproj" />
     <ProjectReference Include="..\NewsApp.ReposInterfaces\NewsApp.ReposInterfaces.csproj" />
     <ProjectReference Include="..\NewsApp.Repository\NewsApp.Repository.csproj" />

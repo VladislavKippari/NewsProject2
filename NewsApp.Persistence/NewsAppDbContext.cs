@@ -19,6 +19,10 @@ namespace NewsApp.Persistence
 
        
         string startupPath = Environment.CurrentDirectory;
+        public NewsAppDbContext(DbContextOptions<NewsAppDbContext> options) : base(options)
+        { }
+        public NewsAppDbContext()
+        { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=NewsAppDB;Trusted_Connection=True;");

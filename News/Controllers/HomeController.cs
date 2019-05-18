@@ -20,8 +20,8 @@ namespace News.Controllers
             db = context;
         }
         string startupPath = Environment.CurrentDirectory;
-  
-        
+
+
         [Authorize]
         public IActionResult Index()
         {

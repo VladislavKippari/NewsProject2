@@ -35,13 +35,13 @@ namespace NewsApp.Persistence
             modelBuilder.Entity<User>().HasData(new
             {
                 UserId = 3,
-                Login = "journalist1",
-                Name = "Journalist",
-                Lastname = "Journalist",
-                Email = "journalist@test.com",
-                Password = PasswordGenerate.HashPassword("Journ-12345"),
+                FirstName = "Jour",
+                LastName = "Journalist",
+                Email = "journalist1@test.com",
+                Password = PasswordGenerate.HashPassword("Journalist1-12345"),
                 RoleId = 3
             });
+
         }
     }
 }

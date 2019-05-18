@@ -5,13 +5,13 @@
 }
 
 <div>
-    <h3 class="text-info ">@ViewBag.UserAuth.FirstName @ViewBag.UserAuth.LastName</h3>
+    <h3 class="text-info ">@ViewBag.UserAuth.FirstName @ViewBag.UserAuth.LastName </h3>
 
     @if (ViewData["Role"].ToString() == "Admin")
     {
         <a class="btn btn-primary" role="button" href="@Url.Action("Admin", "Home")">Admin</a>
-       
-    
+
+
 
     }
     <h2>Claims</h2>
@@ -33,4 +33,4 @@
         }
     </table>
 </div>
-
+<div> class="text-info ">wtttffff</div>

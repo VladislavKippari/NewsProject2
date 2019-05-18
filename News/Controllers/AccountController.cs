@@ -45,6 +45,7 @@ namespace News.Controllers
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
+          
             return View(model);
         }
         [HttpGet]
@@ -82,7 +83,10 @@ namespace News.Controllers
                 else
                     ModelState.AddModelError("", "Такой пользователь уже существует");
             }
+           
+
             return View(model);
+
         }
 
         private async Task Authenticate(User user)
@@ -100,6 +104,7 @@ namespace News.Controllers
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(id));
+
         }
 
         public async Task<IActionResult> Logout()
