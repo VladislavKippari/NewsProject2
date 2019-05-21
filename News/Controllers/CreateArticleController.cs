@@ -37,7 +37,8 @@ namespace News.Controllers
         public IActionResult CreateArticle()
         {
             var model = new CategoryViewModel();
-            model.CategoryName = new SelectList(test.Categorys, "CategoryId", "Name", 1);
+          
+            model.CategoryName = new SelectList(test.Categorys.OrderBy(o => o.Name).ToList(), "CategoryId", "Name", 1);
 
             return View(model);
         }
