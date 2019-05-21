@@ -84,6 +84,10 @@ namespace News.Controllers
         {
             return View(test.Articles.Where(s => s.ArticleId == id).First());
         }
+        public IActionResult CreateCategory()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult UpdateOneArticle(Article art)
         {
@@ -117,7 +121,28 @@ namespace News.Controllers
             return RedirectToAction("CreateArticle");
 
         }
-      
+        [HttpPost]
+        public  IActionResult AddArticleDb(string categoryName)
+        {
+
+            using (var con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+
+                using (var command = con.CreateCommand())
+                {
+
+                    command.CommandText = "insert into Category(Name)  values('" + categoryName + "')";
+                    command.ExecuteNonQuery();
+
+
+                }
+
+            }
+            test.SaveChanges();
+            return RedirectToAction("Details");
+        }
 
 
         public void StoreInDB(string path, string testTitle, string Text, CategoryViewModel model)

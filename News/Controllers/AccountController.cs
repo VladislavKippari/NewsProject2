@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using News.Models;
 using NewsApp.Domain.Entities;
@@ -51,7 +52,10 @@ namespace News.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+
+            model.RoleName = new SelectList(db.Roles.OrderBy(o => o.RoleName).ToList(), "RoleId", "RoleName", 1);
+            return View(model);
         }
 
         [HttpPost]
@@ -63,8 +67,17 @@ namespace News.Controllers
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
+                    Role role = new Role();
                     // добавляем пользователя в бд
-                    Role role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "User");
+                    if (User.IsInRole("Admin"))
+                    {
+                         role = db.Roles.Find(model.RoleId);
+                    }
+                    else
+                    {
+                         role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "User");
+                    }
+                   
                     user = new User
                     {
                         FirstName = model.FirstName,
