@@ -1,0 +1,50 @@
+﻿@model NewsApp.Domain.Entities.Article
+<section class="content-header">
+  
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Update Article</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="post" action="/CreateArticle/UpdateOneArticle">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputData" class="col-sm-2 control-label">Title</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" name="Title" value="@Model.Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputData" class="col-sm-2 control-label">Text</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="ArticleText" value="@Model.ArticleText" rows="4" cols="50">@Model.ArticleText </textarea>
+                    </div>
+                </div>
+
+
+                <input type="hidden" name="Id" value="@Model.ArticleId" />
+                <input type="hidden" class="form-control" name="Category" placeholder="Category" value="@Model.Category">
+             
+                <input type="hidden" class="form-control" name="ArticleId" placeholder="ArticleId" value="@Model.ArticleId">
+
+                <input type="hidden" class="form-control" name="CreatingDate" placeholder="CreatingDate" value="@Model.CreatingDate">
+                <input type="hidden" class="form-control" name="Image" placeholder="Image" value="@Model.Image">
+                <input type="hidden" class="form-control" name="Journalist" placeholder="Journalist" value="@Model.Journalist">
+               
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-info pull-right">Update</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+    <!-- /.box -->
+</section>

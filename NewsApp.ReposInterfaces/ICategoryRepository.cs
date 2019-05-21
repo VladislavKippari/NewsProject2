@@ -8,5 +8,6 @@ namespace NewsApp.ReposInterfaces
 {
     public interface ICategoryRepository : IRepository<Category>, IKeyRepository<Category, int>
     {
+       Category FindById(int id);
     }
 }

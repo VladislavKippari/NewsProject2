@@ -29,6 +29,7 @@ namespace NewsApp.Repository.Repositories
         {
             context.Articles.Find(entity.ArticleId);
             context.Articles.Remove(entity);
+ 
         }
 
         public void Edit(Article entity)

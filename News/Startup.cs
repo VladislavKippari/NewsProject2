@@ -51,6 +51,8 @@ namespace News
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

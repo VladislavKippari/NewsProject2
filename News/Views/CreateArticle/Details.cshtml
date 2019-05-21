@@ -1,0 +1,87 @@
+﻿@model IEnumerable<News.Models.ArticleViewModel>
+@{
+    ViewData["Title"] = "Details";
+}
+<section class="content-header">
+    <h1>
+        Articles
+    </h1>
+
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="articles" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Persona</th>
+                                <th>Created at</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ArticleId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.JournalistName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CreatingDate)</td>
+                                    <td><a href="UpdateArticle/@item.ArticleId">Update</a> | <a href="" onclick="Delete('@item.ArticleId')">Delete</a></td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+<!-- DataTables -->
+<!-- page script -->
+<script>
+    $(function () {
+        $('#articles').DataTable();
+    });
+    function Delete(id){
+        alert(id)
+        var txt;
+        var r = confirm("Are you sure you want to Delete?");
+        if (r == true) {
+
+            $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("DeleteArticle", "CreateArticle")',
+                data: {
+                    id: id
+                },
+                error: function (result) {
+                    alert("error");
+                },
+                    success: function (result) {
+                       
+                    if (result == true) {
+                        history.go(0);
+                    }
+                    else {
+                        alert("There is a problem, Try Later!");
+                    }
+                }
+            });
+        }
+    }
+</script>

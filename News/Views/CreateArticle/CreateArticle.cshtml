@@ -10,10 +10,13 @@
     </div>
     <label>Title</label>
     <input type="text" name="testTitle" />
-    <label>Text</label>
-    <input type="text" name="Text" />
-   <div> @Html.DropDownListFor(n => n.SelectedCategoryId, Model.CategoryName, "Please select Category")</div>
+   
     <div class="form-group">
-        <input type="submit" value="Upload" class="btn btn-default" />
+        <label>Text</label>
+        <textarea class="form-control" type="text" name="Text" rows="4" cols="20">Text</textarea>
     </div>
+        <div> @Html.DropDownListFor(n => n.SelectedCategoryId, Model.CategoryName, "Please select Category")</div>
+        <div class="form-group">
+            <input type="submit" value="Upload" class="btn btn-default" />
+        </div>
 </form>

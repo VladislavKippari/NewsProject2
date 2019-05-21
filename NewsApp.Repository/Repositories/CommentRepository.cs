@@ -12,7 +12,10 @@ namespace NewsApp.Repository.Repositories
     public class CommentRepository : ICommentRepository
     {
         NewsAppDbContext context;
-
+        public CommentRepository(NewsAppDbContext context)
+        {
+            this.context = context;
+        }
         public void Add(Comment entity)
         {
             context.Comments.Add(entity);

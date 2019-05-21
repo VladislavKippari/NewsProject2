@@ -13,7 +13,7 @@ namespace News.Models
 
         public int SelectedCategoryId { get; set; }
         public SelectList CategoryName { get; set; }
-
+       
 
     }
 }

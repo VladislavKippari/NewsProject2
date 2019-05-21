@@ -12,7 +12,10 @@ namespace NewsApp.Repository.Repositories
     public class UserRepository : IUserRepository
     {
         NewsAppDbContext context;
-
+        public UserRepository(NewsAppDbContext context)
+        {
+            this.context = context;
+        }
         public void Add(User entity)
         {
             context.Users.Add(entity);

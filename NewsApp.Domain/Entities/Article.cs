@@ -18,5 +18,6 @@ namespace NewsApp.Domain.Entities
         public User Journalist { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public Category Category { get; set; }
+      
     }
 }

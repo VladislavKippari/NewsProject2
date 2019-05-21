@@ -12,7 +12,13 @@ namespace NewsApp.Repository.Repositories
     public class CategoryRepository : ICategoryRepository
     {
         NewsAppDbContext context;
+     
 
+
+        public CategoryRepository(NewsAppDbContext context)
+        {
+            this.context = context;
+        }
         public void Add(Category entity)
         {
             context.Categorys.Add(entity);
@@ -52,6 +58,11 @@ namespace NewsApp.Repository.Repositories
             return categories.AsQueryable<Category>();
         }
 
+        public Category FindById(int id)
+        {
+            return context.Categorys.Where(c => c.CategoryId == id).SingleOrDefault();
+               
+        }
         public Category GetSingle(int entityKey)
         {
             return context.Categorys.Where(c => c.CategoryId == entityKey)
