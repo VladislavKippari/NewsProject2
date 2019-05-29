@@ -3,7 +3,37 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    table table-striped {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
+    table table-striped td, #table table-striped th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    table table-striped tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table table-striped tr:hover {
+        background-color: #ddd;
+    }
+
+    table table-striped th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    
+</style>
+    
 <div>
     <h3 class="text-info ">@ViewBag.UserAuth.FirstName @ViewBag.UserAuth.LastName </h3>
 
