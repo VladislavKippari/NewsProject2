@@ -26,5 +26,6 @@ namespace News.Models
         public int JournalistUserId { get; set; }
         public string CategoryName { get; set; }
         public string JournalistName { get; set; }
+        public string Email { get; set; }
     }
 }
