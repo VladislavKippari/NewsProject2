@@ -73,5 +73,10 @@ namespace NewsApp.Repository.Repositories
             return context.Articles.Where(a => a.ArticleId == entityKey)
                 .SingleOrDefault();
         }
+
+        public Article FindById(int id)
+        {
+            return context.Articles.Where(c => c.ArticleId == id).SingleOrDefault();
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace NewsApp.ReposInterfaces
 {
     public interface ICommentRepository : IRepository<Comment>, IKeyRepository<Comment, int>
     {
+        Comment FindById(int id);
     }
 }

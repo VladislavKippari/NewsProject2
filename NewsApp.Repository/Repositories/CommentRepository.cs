@@ -60,5 +60,10 @@ namespace NewsApp.Repository.Repositories
             return context.Comments.Where(c => c.CommentId == entityKey)
                 .SingleOrDefault();
         }
+
+        public Comment FindById(int id)
+        {
+            return context.Comments.Where(c => c.CommentId == id).SingleOrDefault();
+        }
     }
 }

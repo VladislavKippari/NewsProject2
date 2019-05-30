@@ -1,48 +1,80 @@
-﻿@model IEnumerable<News.Models.ArticleViewModel>
+﻿@model dynamic
 
 @{
     ViewData["Title"] = "";
 }
 <div class="col-lg-8">
-    @foreach (var item in Model)
+    @foreach (ArticleViewModel item in Model.ArticleViewModel)
     {
-        <!-- Title -->
+
         <h1 class="mt-4">@Html.DisplayFor(model => item.Title)</h1>
 
-        <!-- Author -->
         <p class="lead">by @Html.DisplayFor(model => item.JournalistName)</p>
         <hr>
-        <!-- Date/Time -->
+
         <p>Posted on @Html.DisplayFor(model => item.CreatingDate)</p>
         <p>Category: @Html.DisplayFor(model => item.CategoryName)</p>
         <hr>
-        <!-- Preview Image -->
+
         <img class="img-fluid rounded" src="~/images/@Html.DisplayFor(model => item.Image)" alt="">
         <hr>
-        <!-- Post Content -->
+
         <p>@Html.DisplayFor(model => item.ArticleText)</p>
         <hr>
-
-        <!-- Comments Form -->
-        <div class="card my-4">
-            <h5 class="card-header">Leave a Comment:</h5>
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form asp-action="AddComment">
+                        <input type="hidden" name="id" value="@item.ArticleId" />
+                        <div class="form-group">
+                            <textarea class="form-control" name="CommentText" rows="3"></textarea>
+                        </div>
+                        <button type="submit" value="Upload" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <!-- Single Comment -->
-        <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        }
+        @foreach (CommentViewModel comment in Model.CommentViewModel)
+        {
+            <div class="media mb-4">
+                <div class="media-body">
+                    <h5 class="mt-0">@Html.DisplayFor(model => comment.CommenterName)</h5>
+                    <p>@Html.DisplayFor(model => comment.CommentText)@if (this.User.IsInRole("Admin")){<button type="button" class="btn btn-link" onclick="Delete('@comment.CommentId')">Link</button>}</p>
+                </div>
             </div>
-        </div>
+        }
     }
 </div>
+
+<script>
+    function Delete(id){
+        alert(id)
+        var txt;
+        var r = confirm("Are you sure you want to Delete?");
+        if (r == true) {
+
+            $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("DeleteComment", "CreateArticle")',
+                data: {
+                    id: id
+                },
+                error: function (result) {
+                    alert("error");
+                },
+                    success: function (result) {
+
+                    if (result == true) {
+                        history.go(0);
+                    }
+                    else {
+                        alert("There is a problem, Try Later!");
+                    }
+                }
+            });
+        }
+    }
+</script>

@@ -22,12 +22,8 @@ namespace News.Controllers
         string startupPath = Environment.CurrentDirectory;
 
 
-        [Authorize]
         public IActionResult Index()
         {
-            ViewData["UserName"] = User.Identity.Name;
-            ViewBag.UserAuth = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
-            ViewData["Role"] = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
             var article = db.Articles
                 .Include("Article")
                 .Select(a => new ArticleViewModel

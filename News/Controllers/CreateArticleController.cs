@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace News.Controllers
         IArticleRepository articleRepo;
         ICategoryRepository catRepo;
         IUserRepository userRepo;
+        ICommentRepository commRepo;
         NewsAppDbContext test = new NewsAppDbContext();
         public CreateArticleController(IArticleRepository ar, ICategoryRepository cat, IUserRepository usr)
         {
@@ -37,7 +39,7 @@ namespace News.Controllers
         public IActionResult CreateArticle()
         {
             var model = new CategoryViewModel();
-          
+
             model.CategoryName = new SelectList(test.Categorys.OrderBy(o => o.Name).ToList(), "CategoryId", "Name", 1);
 
             return View(model);
@@ -56,7 +58,7 @@ namespace News.Controllers
                                ArticleText = a.ArticleText,
                                Image = a.Image,
                                CategoryName = catRepo.FindById(a.Category.CategoryId).Name,
-                               Email=a.Journalist.Email,
+                               Email = a.Journalist.Email,
                                JournalistName = userRepo.GetSingle(a.Journalist.UserId).FirstName + " " + userRepo.GetSingle(a.Journalist.UserId).LastName
                            });
             return View(products);
@@ -68,15 +70,15 @@ namespace News.Controllers
         {
             try
             {
-                
+
                 Article art = test.Articles.Where(s => s.ArticleId == id).First();
                 test.Articles.Remove(art);
                 test.SaveChanges();
-              
+
 
                 return true;
             }
-           
+
             catch (System.Exception)
             {
                 return false;
@@ -97,7 +99,7 @@ namespace News.Controllers
             Article d = test.Articles.Where(s => s.ArticleId == art.ArticleId).First();
             d.Title = art.Title;
             d.ArticleText = art.ArticleText;
-           
+
             test.SaveChanges();
             return RedirectToAction("Details");
         }
@@ -125,7 +127,7 @@ namespace News.Controllers
 
         }
         [HttpPost]
-        public  IActionResult AddArticleDb(string categoryName)
+        public IActionResult AddArticleDb(string categoryName)
         {
 
             using (var con = new SqlConnection(connectionString))
@@ -150,7 +152,7 @@ namespace News.Controllers
 
         public void StoreInDB(string path, string testTitle, string Text, CategoryViewModel model)
         {
-          
+
             using (var con = new SqlConnection(connectionString))
             {
                 con.Open();
@@ -158,7 +160,7 @@ namespace News.Controllers
 
                 using (var command = con.CreateCommand())
                 {
-            
+
                     command.CommandText = "insert into Article(Image)  values('" + path + "')";
                     command.ExecuteNonQuery();
 
@@ -173,14 +175,14 @@ namespace News.Controllers
 
 
             int curArt = test.Articles.Last().ArticleId;
-            
+
             var art = test.Articles.Where(w => w.ArticleId == curArt).FirstOrDefault();
-            
+
             Category cat = test.Categorys.Find(model.SelectedCategoryId);
             cat.Articles.Add(test.Articles.Find(curArt));
             var user = test.Users.Where(w => w.Email == User.Identity.Name).FirstOrDefault();
             User journ = test.Users.Find(user.UserId);
-           
+
             art.Journalist = journ;
             art.Journalist.UserId = journ.UserId;
             art.Category = cat;
@@ -218,7 +220,8 @@ namespace News.Controllers
 
         public IActionResult ArticleInfo(int id)
         {
-            var products = test.Articles
+            dynamic models = new ExpandoObject();
+            models.ArticleViewModel = test.Articles
                            .Include("Article")
                            .Select(a => new ArticleViewModel
                            {
@@ -230,7 +233,54 @@ namespace News.Controllers
                                CategoryName = catRepo.FindById(a.Category.CategoryId).Name,
                                JournalistName = userRepo.GetSingle(a.Journalist.UserId).FirstName + " " + userRepo.GetSingle(a.Journalist.UserId).LastName
                            }).Where(a => a.ArticleId == id);
-            return View(products);
+
+            models.CommentViewModel = test.Comments
+                           .Include("Comment")
+                           .Select(c => new CommentViewModel
+                           {
+                               CommentId = c.CommentId,
+                               CommentText = c.CommentText,
+                               CommenterName = userRepo.GetSingle(c.User.UserId).FirstName + " " + userRepo.GetSingle(c.User.UserId).LastName,
+                               ArticleId = articleRepo.FindById(c.Article.ArticleId).ArticleId
+                           }).Where(c => c.ArticleId == id);
+            return View(models);
+        }
+
+        [HttpPost]
+        public IActionResult AddComment(int id, string CommentText)
+        {
+            var user = test.Users.Where(u => u.Email == User.Identity.Name).FirstOrDefault();
+            User commentator = test.Users.Find(user.UserId);
+            var article = test.Articles.Where(a => a.ArticleId == id).FirstOrDefault();
+            Article articcomm = test.Articles.Find(article.ArticleId);
+
+            using (var con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (var command = con.CreateCommand())
+                {
+                    command.CommandText = "insert into Comment(CommentText, UserId, ArticleId)  values('" + CommentText + "', '" + commentator.UserId + "', '" + articcomm.ArticleId + "')";
+                    command.ExecuteNonQuery();
+                }
+            }
+            test.SaveChanges();
+            return RedirectToAction("ArticleInfo/" + id);
+        }
+
+        [HttpPost]
+        public bool DeleteComment(int id)
+        {
+            try
+            {
+                Comment com = test.Comments.Where(s => s.CommentId == id).First();
+                test.Comments.Remove(com);
+                test.SaveChanges();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
         }
     }
 }
