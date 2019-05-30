@@ -27,19 +27,24 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.ArticleId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.JournalistName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CreatingDate)</td>
-                                    <td><a href="UpdateArticle/@item.ArticleId">Update</a> | <a href="" onclick="Delete('@item.ArticleId')">Delete</a></td>
-                                </tr>
-                            }
-                    </table>
+                           
+                                    @if (this.User.IsInRole("Journalist") && item.Email == this.User.Identity.Name || this.User.IsInRole("Admin"))
+                                    {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.ArticleId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.JournalistName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CreatingDate)</td>
+                                        <td><a href="UpdateArticle/@item.ArticleId">Update</a> | <a href="" onclick="Delete('@item.ArticleId')">Delete</a></td>
+                                    </tr>
+                                }
+                                    }
+</table>
                 </div>
                 <!-- /.box-body -->
             </div>
