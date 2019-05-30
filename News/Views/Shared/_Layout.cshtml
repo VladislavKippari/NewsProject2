@@ -96,7 +96,7 @@ ul li ul li {
                     <span class="icon-bar"></span>
                 </button>
                 
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><big><b><em>News</b> </big></em>  </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><big><b><em>News</b> </big></em></a>
                 
             </div>
                     
@@ -104,15 +104,9 @@ ul li ul li {
             
                 <ul class="nav navbar-nav dropdown">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index"><big>Home</big></a></li>
-                    <li><a asp-area="" asp-controller="About" asp-action="Index"> <big>About</big></a></li>
-                    <li><a asp-area="" asp-controller="Contact" asp-action="Index"><big>Contact</big></a></li>
-
-
                     @if (this.User.IsInRole("Journalist") || this.User.IsInRole("Admin"))
                     {
-
                         <li><a asp-area="" asp-controller="CreateArticle" asp-action="Details">Articles for Editing</a></li>
-
                         <li>
                             <a href="#">Add New</a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
@@ -122,16 +116,13 @@ ul li ul li {
                                     <li><a asp-controller="Account" asp-action="Register">New User</a></li>
                                     <li><a asp-controller="CreateArticle" asp-action="CreateCategory">New Category</a></li>
                                 }
-
-
                             </ul>
                         </li>
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <li><a asp-area="" asp-controller="Home" asp-action="Admin">Admin panel</a></li>
+                        }
                     }
-
-
-
-
-
                 </ul>
 
                         <ul class="nav navbar-nav navbar-right">
@@ -162,7 +153,6 @@ ul li ul li {
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
     </div>
        </div> 
         <footer>

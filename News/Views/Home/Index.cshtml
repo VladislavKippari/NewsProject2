@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@model IEnumerable<News.Models.ArticleViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -10,57 +11,37 @@
         width: 100%;
     }
 
-    table table-striped td, #table table-striped th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    table table-striped tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    table table-striped tr:hover {
-        background-color: #ddd;
-    }
-
-    table table-striped th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    
-</style>
-    
-<div>
-    <h3 class="text-info ">@ViewBag.UserAuth.FirstName @ViewBag.UserAuth.LastName </h3>
-
-    @if (ViewData["Role"].ToString() == "Admin")
-    {
-        <a class="btn btn-primary" role="button" href="@Url.Action("Admin", "Home")">Admin</a>
-
-
-
-    }
-    <h2>Claims</h2>
-    <table class="table table-striped">
-        <tr>
-            <th>Subject</th>
-            <th>Issuer</th>
-            <th>Type</th>
-            <th>Value</th>
-        </tr>
-        @foreach (Claim claim in User.Claims)
-        {
-            <tr>
-                <td>@claim.Subject.Name</td>
-                <td>@claim.Issuer</td>
-                <td>@claim.Type</td>
-                <td>@claim.Value</td>
-            </tr>
+        table table-striped td, #table table-striped th {
+            border: 1px solid #ddd;
+            padding: 8px;
         }
-    </table>
+
+        table table-striped tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table table-striped tr:hover {
+            background-color: #ddd;
+        }
+
+        table table-striped th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+</style>
+
+<div>
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <img class="card-img-top" src="~/images/@item.Image">
+                <div class="card-body">
+                    <h3 class="card-title"><a href="CreateArticle/ArticleInfo/@item.ArticleId">@item.Title</a></h3>
+                </div>
+        </div>
+        <hr>
+    }
 </div>
-<div> class="text-info ">wtttffff</div>

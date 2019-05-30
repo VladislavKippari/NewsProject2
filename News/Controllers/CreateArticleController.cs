@@ -116,7 +116,7 @@ namespace News.Controllers
                 await form.Files[0].CopyToAsync(stream);
             }
 
-            StoreInDB(storePath + form.Files[0].FileName, testTitle, Text, model);
+            StoreInDB(form.Files[0].FileName, testTitle, Text, model);
 
             return RedirectToAction("CreateArticle");
 
@@ -166,14 +166,13 @@ namespace News.Controllers
 
             }
 
-          
-           
-           
-       
-            var art = test.Articles.Where(w => w.ArticleId == test.Articles.Last().ArticleId).FirstOrDefault();
-            
+
+
+            int curArt = test.Articles.Last().ArticleId;
+
+            var art = test.Articles.Where(w => w.ArticleId == curArt).FirstOrDefault();     
             Category cat = test.Categorys.Find(model.SelectedCategoryId);
-            cat.Articles.Add(test.Articles.Last());
+            cat.Articles.Add(test.Articles.Find(curArt));
             var user = test.Users.Where(w => w.Email == User.Identity.Name).FirstOrDefault();
             User journ = test.Users.Find(user.UserId);
 
@@ -210,6 +209,23 @@ namespace News.Controllers
             }
 
             return imagePath;
+        }
+
+        public IActionResult ArticleInfo(int id)
+        {
+            var products = test.Articles
+                           .Include("Article")
+                           .Select(a => new ArticleViewModel
+                           {
+                               ArticleId = a.ArticleId,
+                               Title = a.Title,
+                               CreatingDate = a.CreatingDate,
+                               ArticleText = a.ArticleText,
+                               Image = a.Image,
+                               CategoryName = catRepo.FindById(a.Category.CategoryId).Name,
+                               JournalistName = userRepo.GetSingle(a.Journalist.UserId).FirstName + " " + userRepo.GetSingle(a.Journalist.UserId).LastName
+                           }).Where(a => a.ArticleId == id);
+            return View(products);
         }
     }
 }

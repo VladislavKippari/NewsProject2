@@ -28,7 +28,16 @@ namespace News.Controllers
             ViewData["UserName"] = User.Identity.Name;
             ViewBag.UserAuth = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
             ViewData["Role"] = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
-            return View();
+            var article = db.Articles
+                .Include("Article")
+                .Select(a => new ArticleViewModel
+                {
+                    ArticleId = a.ArticleId,
+                    Image = a.Image,
+                    Title = a.Title
+                });
+
+            return View(article);
         }
 
         [Authorize(Roles = "Admin")]
