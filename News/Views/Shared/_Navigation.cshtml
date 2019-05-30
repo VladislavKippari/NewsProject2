@@ -1,0 +1,7 @@
+﻿@model IEnumerable<News.Models.MenuViewModel>
+
+
+@foreach (MenuViewModel item in Model)
+{
+    <li><a asp-area="" asp-controller="CreateArticle" asp-action="ArticlesByCategory">@item.CategoryName</a></li>
+}

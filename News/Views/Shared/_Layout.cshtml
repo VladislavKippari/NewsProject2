@@ -84,7 +84,6 @@ ul li ul li {
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-
 <body>
     <div id="page-wrap">
 
@@ -104,9 +103,15 @@ ul li ul li {
             </div>
                     
             <div class="navbar-collapse collapse">
-            
+
                 <ul class="nav navbar-nav dropdown">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index"><big>Home</big></a></li>
+                    @*<li>
+                        <a href="#"><b>Categories</b></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            @Html.PartialAsync("_Navigation", "Menu")
+                        </ul>
+                    </li>*@
                     @if (this.User.IsInRole("Journalist") || this.User.IsInRole("Admin"))
                     {
                         <li><a asp-area="" asp-controller="CreateArticle" asp-action="Details"><b>Articles for Editing</b></a></li>
@@ -128,27 +133,33 @@ ul li ul li {
                     }
                 </ul>
 
-                        <ul class="nav navbar-nav navbar-right">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item">
-                                    <p class="navbar-text"><b>Welcome</b> <span><i class="glyphicon glyphicon-ok text-success"></i>&nbsp; <b>@User.Identity.Name</b></span></p>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Logout"><b>Logout</b></a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Login"><b>Login</b></a>
-                                </li>
-                                <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Account" asp-action="Register"><b>Register</b></a>
-                                    </li>
-                                }
-                            </ul>
-</div>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <p class="navbar-text"><b>Welcome</b> <span><i class="glyphicon glyphicon-ok text-success"></i>&nbsp; <b>@User.Identity.Name</b></span></p>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout"><b>Logout</b></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login"><b>Login</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Register"><b>Register</b></a>
+                        </li>
+                    }
+                </ul>
+                <form asp-controller="CreateArticle" asp-action="ArticleSearch" class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" name="searchText">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
         </div>
     </nav>
 

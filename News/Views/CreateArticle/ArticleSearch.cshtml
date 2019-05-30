@@ -1,0 +1,18 @@
+﻿@model IEnumerable<News.Models.ArticleViewModel>
+
+@{
+    ViewData["Title"] = "Search results";
+}
+
+<div>
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <img class="card-img-top" src="~/images/@item.Image">
+            <div class="card-body">
+                <h3 class="card-title"><a href="CreateArticle/ArticleInfo/@item.ArticleId">@item.Title</a></h3>
+            </div>
+        </div>
+        <hr>
+    }
+</div>

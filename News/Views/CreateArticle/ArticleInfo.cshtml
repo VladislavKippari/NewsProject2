@@ -41,7 +41,7 @@
             <div class="media mb-4">
                 <div class="media-body">
                     <h5 class="mt-0">@Html.DisplayFor(model => comment.CommenterName)</h5>
-                    <p>@Html.DisplayFor(model => comment.CommentText)@if (this.User.IsInRole("Admin")){<button type="button" class="btn btn-link" onclick="Delete('@comment.CommentId')">Link</button>}</p>
+                    <p>@Html.DisplayFor(model => comment.CommentText)@if (this.User.IsInRole("Admin")){<button type="button" class="btn btn-link" onclick="Delete('@comment.CommentId')">Delete</button>}</p>
                 </div>
             </div>
         }

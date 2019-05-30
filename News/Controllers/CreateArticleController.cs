@@ -282,5 +282,19 @@ namespace News.Controllers
                 return false;
             }
         }
+
+        public IActionResult ArticleSearch(string searchText)
+        {
+            var article = test.Articles
+                .Include("Article")
+                .Select(a => new ArticleViewModel
+                {
+                    ArticleId = a.ArticleId,
+                    Image = a.Image,
+                    Title = a.Title
+                }).Where(a => a.Title.Contains(searchText));
+
+            return View(article);
+        }
     }
 }
