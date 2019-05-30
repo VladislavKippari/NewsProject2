@@ -65,7 +65,7 @@ ul li ul li {
         min-height: 94%;
         margin-bottom: -10px;
     }
-
+   
     </style>
 <html>
 <head>
@@ -132,7 +132,7 @@ ul li ul li {
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item">
-                                    <p class="navbar-text">Welcome <span><i class="glyphicon glyphicon-ok text-success"></i>&nbsp; <b>@User.Identity.Name</b></span></p>
+                                    <p class="navbar-text"><b>Welcome</b> <span><i class="glyphicon glyphicon-ok text-success"></i>&nbsp; <b>@User.Identity.Name</b></span></p>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" asp-controller="Account" asp-action="Logout"><b>Logout</b></a>
@@ -144,10 +144,10 @@ ul li ul li {
                                     <a class="nav-link" asp-controller="Account" asp-action="Login"><b>Login</b></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Register"><b>Register</b></a>
-                                </li>
-                            }
-                        </ul>
+                                        <a class="nav-link" asp-controller="Account" asp-action="Register"><b>Register</b></a>
+                                    </li>
+                                }
+                            </ul>
 </div>
         </div>
     </nav>
