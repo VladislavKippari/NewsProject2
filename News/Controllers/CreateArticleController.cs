@@ -130,21 +130,8 @@ namespace News.Controllers
         public IActionResult AddArticleDb(string categoryName)
         {
 
-            using (var con = new SqlConnection(connectionString))
-            {
-                con.Open();
-
-
-                using (var command = con.CreateCommand())
-                {
-
-                    command.CommandText = "insert into Category(Name)  values('" + categoryName + "')";
-                    command.ExecuteNonQuery();
-
-
-                }
-
-            }
+            
+            test.Categorys.Add(new Category { Name = categoryName });
             test.SaveChanges();
             return RedirectToAction("Details");
         }
@@ -153,24 +140,7 @@ namespace News.Controllers
         public void StoreInDB(string path, string testTitle, string Text, CategoryViewModel model)
         {
 
-            using (var con = new SqlConnection(connectionString))
-            {
-                con.Open();
-
-
-                using (var command = con.CreateCommand())
-                {
-
-                    command.CommandText = "insert into Article(Image)  values('" + path + "')";
-                    command.ExecuteNonQuery();
-
-
-                }
-
-
-
-            }
-
+            test.Articles.Add(new Article { Image = path });
 
 
 
