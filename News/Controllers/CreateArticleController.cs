@@ -141,7 +141,7 @@ namespace News.Controllers
         {
 
             test.Articles.Add(new Article { Image = path });
-
+            test.SaveChanges();
 
 
             int curArt = test.Articles.Last().ArticleId;
